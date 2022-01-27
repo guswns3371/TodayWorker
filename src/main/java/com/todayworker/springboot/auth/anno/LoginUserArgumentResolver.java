@@ -1,6 +1,6 @@
-package com.todayworker.springboot.config.auth;
+package com.todayworker.springboot.auth.anno;
 
-import com.todayworker.springboot.config.auth.dto.SessionUser;
+import com.todayworker.springboot.auth.dto.SessionUser;
 import lombok.RequiredArgsConstructor;
 import org.springframework.core.MethodParameter;
 import org.springframework.stereotype.Component;

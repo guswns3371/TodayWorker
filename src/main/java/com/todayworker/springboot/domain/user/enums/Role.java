@@ -1,4 +1,4 @@
-package com.todayworker.springboot.domain.user;
+package com.todayworker.springboot.domain.user.enums;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;

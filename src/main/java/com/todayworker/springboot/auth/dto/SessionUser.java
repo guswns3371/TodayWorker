@@ -1,6 +1,6 @@
-package com.todayworker.springboot.config.auth.dto;
+package com.todayworker.springboot.auth.dto;
 
-import com.todayworker.springboot.domain.user.User;
+import com.todayworker.springboot.domain.user.entity.User;
 import lombok.Getter;
 
 import java.io.Serializable;
@@ -14,7 +14,7 @@ public class SessionUser implements Serializable {
 
     public SessionUser(User user)
     {
-        this.name = user.getName();
+        this.name = user.getUsername();
         this.email = user.getEmail();
         this.picture = user.getPicture();
     }

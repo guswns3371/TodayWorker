@@ -1,7 +1,10 @@
-package com.todayworker.springboot.domain.user;
+package com.todayworker.springboot.domain.user.entity;
 
 
 import com.todayworker.springboot.domain.BaseTimeEntity;
+import com.todayworker.springboot.domain.user.enums.AuthProvider;
+import com.todayworker.springboot.domain.user.enums.Role;
+import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -9,7 +12,7 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 
 @Getter
-@NoArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Entity
 public class User extends BaseTimeEntity {
 
@@ -18,10 +21,12 @@ public class User extends BaseTimeEntity {
     private Long id;
 
     @Column(nullable = true)
-    private String name;
+    private String username;
 
     @Column(nullable = false)
     private String email;
+
+    private String password;
 
     @Column
     private String picture;
@@ -30,17 +35,22 @@ public class User extends BaseTimeEntity {
     @Column(nullable = false)
     private Role role;
 
+    @Enumerated(EnumType.STRING)
+    private AuthProvider authProvider = AuthProvider.NONE;
+
     @Builder
-    public User(String name, String email, String picture, Role role) {
-        this.name = name;
+    public User(String username, String email, String password, String picture, Role role, AuthProvider authProvider) {
+        this.username = username;
         this.email = email;
+        this.password = password;
         this.picture = picture;
         this.role = role;
+        this.authProvider = authProvider;
     }
 
     public User update(String name, String picture) {
         if (name != null) {
-            this.name = name;
+            this.username = name;
         }
         else if (picture != null) {
             this.picture = picture;
@@ -52,4 +62,5 @@ public class User extends BaseTimeEntity {
     public String getRoleKey() {
         return this.role.getKey();
     }
+
 }

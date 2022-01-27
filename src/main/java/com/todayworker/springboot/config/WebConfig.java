@@ -1,6 +1,6 @@
 package com.todayworker.springboot.config;
 
-import com.todayworker.springboot.config.auth.LoginUserArgumentResolver;
+import com.todayworker.springboot.auth.anno.LoginUserArgumentResolver;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.method.support.HandlerMethodArgumentResolver;

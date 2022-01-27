@@ -1,15 +1,23 @@
-package com.todayworker.springboot.config.auth;
+package com.todayworker.springboot.config;
 
+import com.todayworker.springboot.auth.oauth.PrincipalOAuth2UserService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.context.annotation.Bean;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 @RequiredArgsConstructor
 @EnableWebSecurity  // 스프링 시큐리티 설정들을 활성화시켜 준다.
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
-    private final CustomOAuth2UserService customOAuth2UserService;
+    private final PrincipalOAuth2UserService principalOAuth2UserService;
+
+    @Bean
+    public BCryptPasswordEncoder encodePwd() {
+        return new BCryptPasswordEncoder();
+    }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
@@ -28,7 +36,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .oauth2Login() // OAuth2 로그인 기능에 대한 여러 설정의 진입점입니다.
                 .defaultSuccessUrl("http://localhost:3333")
                 .userInfoEndpoint() // OAuth2 로그인 성공 이후 사용자 정보를 가져올 때의 설정들을 담당한다.
-                .userService(customOAuth2UserService); // 소셜 로그인 성공시 후속 조치를 진행할 UserService 인터페이스를 구현체로 등록. 리소스 서버(즉, 소셜 서비스들)에서 사용자 정보를 가져온 상태에서 추가로 진행하고자 하는 기능을 명시할 수 있다.
+                .userService(principalOAuth2UserService); // 소셜 로그인 성공시 후속 조치를 진행할 UserService 인터페이스를 구현체로 등록. 리소스 서버(즉, 소셜 서비스들)에서 사용자 정보를 가져온 상태에서 추가로 진행하고자 하는 기능을 명시할 수 있다.
 
     }
 }

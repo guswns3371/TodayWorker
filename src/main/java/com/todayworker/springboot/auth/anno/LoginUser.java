@@ -1,4 +1,4 @@
-package com.todayworker.springboot.config.auth;
+package com.todayworker.springboot.auth.anno;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
